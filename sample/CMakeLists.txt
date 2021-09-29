@@ -1,9 +1,6 @@
 # project name
 project(sample)
 
-# assign sample generate path
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/${PROJECT_SOURCE_DIR})
-
 # executable files
 add_executable(${PROJECT_NAME} main.cpp)
 

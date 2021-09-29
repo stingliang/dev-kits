@@ -4,8 +4,9 @@ cmake_minimum_required(VERSION 3.12)
 # project name
 project(dev-utility-library)
 
-# assign library generate path
+# assign generate path
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/lib)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/bin)
 
 # cpp version
 set(CMAKE_CXX_STANDARD 14)

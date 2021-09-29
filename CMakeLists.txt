@@ -13,7 +13,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 # include all source files
 file(GLOB SOURCES
-        ${PROJECT_SOURCE_DIR}/Logger/Logger.cpp
+        ${PROJECT_SOURCE_DIR}/logger/logger.cpp
+        ${PROJECT_SOURCE_DIR}/utility/utility.cpp
         )
 
 # include list

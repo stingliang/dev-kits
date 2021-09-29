@@ -14,6 +14,7 @@ void logger_sample() {
     LOG(INFO, "Hello, World!")
     LOG(WARN, "Hello, World!")
     LOG(ERROR, "Hello, World!")
+    LOGGER_LEVEL(DEBUG)
 }
 
 #endif //DEV_UTILITY_LIBRARY_LOGGER_SAMPLE_H

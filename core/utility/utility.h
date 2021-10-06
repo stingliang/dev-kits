@@ -5,7 +5,7 @@
 #ifndef DEV_UTILITY_LIBRARY_UTILITY_H
 #define DEV_UTILITY_LIBRARY_UTILITY_H
 
-#include <common.h>
+#include <core/common.h>
 
 ///
 /// \tparam T1

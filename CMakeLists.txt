@@ -4,6 +4,12 @@ cmake_minimum_required(VERSION 3.10)
 # project name
 project(dev-utility-library)
 
+# use boost or not
+option(USE_BOOST "option for boost" ON)
+if (USE_BOOST)
+    add_definitions(-DUSE_BOOST)
+endif(USE_BOOST)
+
 # assign generate path
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/bin)
@@ -15,6 +21,8 @@ set(CMAKE_CXX_STANDARD 14)
 file(GLOB SOURCES
         ${PROJECT_SOURCE_DIR}/logger/logger.cpp
         ${PROJECT_SOURCE_DIR}/utility/utility.cpp
+        ${PROJECT_SOURCE_DIR}/asio/server.cpp
+        ${PROJECT_SOURCE_DIR}/asio/client.cpp
         )
 
 # include list
@@ -32,7 +40,7 @@ set(LIBRARY_LIST
 add_library(dev-utility-library SHARED
         ${SOURCES}
         )
-add_library(sting::dev ALIAS ${PROJECT_NAME})
+#add_library(sting::dev ALIAS ${PROJECT_NAME})
 
 # include libraries
 target_include_directories(dev-utility-library PUBLIC
@@ -45,4 +53,4 @@ target_link_libraries(dev-utility-library PUBLIC
         )
 
 # sample
-add_subdirectory(sample)
+#add_subdirectory(sample)

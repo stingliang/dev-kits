@@ -4,6 +4,9 @@
 
 #include "logger.h"
 
+#ifdef USE_BOOST
+
+//#else
 logger::Ptr logger::m_logger = nullptr;
 std::mutex logger::m_mutex;
 std::map<int, std::string> logger::m_severity{
@@ -46,3 +49,4 @@ void logger::log(const Severity &severity) {
         m_mutex.unlock();
     }
 }
+#endif

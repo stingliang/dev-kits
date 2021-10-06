@@ -18,4 +18,8 @@
 #include <map>
 #include <set>
 
+#ifdef USE_BOOST
+// boost include
+#endif
+
 #endif //DEV_UTILITY_LIBRARY_COMMON_H

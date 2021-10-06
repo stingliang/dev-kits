@@ -7,11 +7,6 @@
 
 #include <common.h>
 
-#define LOGGER_LEVEL(SEVERITY) logger::getInstance()->setSeverity(SEVERITY);
-#define LOG(SEVERITY, MESSAGE) logger::getInstance()->m_ss.str(""); \
-                               logger::getInstance()->m_ss << MESSAGE; \
-                               logger::getInstance()->log(SEVERITY);
-
 enum Severity {
     TRACE = 0,
     DEBUG,
@@ -19,6 +14,14 @@ enum Severity {
     WARN,
     ERROR
 };
+
+#ifdef USE_BOOST
+
+//#else
+#define LOGGER_LEVEL(SEVERITY) logger::getInstance()->setSeverity(SEVERITY);
+#define LOG(SEVERITY, MESSAGE) logger::getInstance()->m_ss.str(""); \
+logger::getInstance()->m_ss << MESSAGE; \
+logger::getInstance()->log(SEVERITY);
 
 class logger {
 public:
@@ -36,6 +39,7 @@ private:
     static std::mutex m_mutex;
     static std::map<int, std::string> m_severity;
 };
+#endif
 
 
 #endif //DEV_UTILITY_LOGGER_H

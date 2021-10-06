@@ -10,47 +10,31 @@ if (USE_BOOST)
     add_definitions(-DUSE_BOOST)
 endif(USE_BOOST)
 
-# assign generate path
-set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/lib)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/bin)
+# cmake settings
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/output/lib)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/output/bin)
+
+# print info
+set(SPLIT_LINE "-------------------------------------------------------")
+message(STATUS ${SPLIT_LINE})
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    message(STATUS "current platform: Linux ")
+    message(STATUS "library output path = ${CMAKE_SOURCE_DIR}/output/lib")
+    message(STATUS "executable output path = ${CMAKE_SOURCE_DIR}/output/bin")
+elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
+    message(STATUS "current platform: Windows")
+    message(STATUS "LIBRARY_OUTPUT_PATH = ${CMAKE_SOURCE_DIR}/output/lib")
+    message(STATUS "EXECUTABLE_OUTPUT_PATH = ${CMAKE_SOURCE_DIR}/output/bin")
+else ()
+    message(STATUS "other platform: ${CMAKE_SYSTEM_NAME}")
+endif (CMAKE_SYSTEM_NAME MATCHES "Linux")
+message(STATUS ${SPLIT_LINE})
 
 # cpp version
 set(CMAKE_CXX_STANDARD 14)
 
-# include all source files
-file(GLOB SOURCES
-        ${PROJECT_SOURCE_DIR}/logger/logger.cpp
-        ${PROJECT_SOURCE_DIR}/utility/utility.cpp
-        ${PROJECT_SOURCE_DIR}/asio/server.cpp
-        ${PROJECT_SOURCE_DIR}/asio/client.cpp
-        )
-
-# include list
-set(INCLUDE_LIST
-        ${CMAKE_SOURCE_DIR}
-        )
-
-# library list
-set(LIBRARY_LIST
-        # std library
-        # pthread
-        )
-
-# create a library
-add_library(dev-utility-library SHARED
-        ${SOURCES}
-        )
-#add_library(sting::dev ALIAS ${PROJECT_NAME})
-
-# include libraries
-target_include_directories(dev-utility-library PUBLIC
-        ${INCLUDE_LIST}
-        )
-
-# link libraries
-target_link_libraries(dev-utility-library PUBLIC
-        ${LIBRARY_LIST}
-        )
+# library
+add_subdirectory(core)
 
 # sample
-#add_subdirectory(sample)
+add_subdirectory(sample)

@@ -14,3 +14,4 @@ build
 cmake-*
 .idea
 .vscode
+/output/

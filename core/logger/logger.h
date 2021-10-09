@@ -4,7 +4,7 @@
 #ifndef DEV_UTILITY_LOGGER_H
 #define DEV_UTILITY_LOGGER_H
 
-#include "common.h"
+#include "../common.h"
 
 // boost include
 #include <boost/log/core.hpp>

@@ -11,47 +11,33 @@ file(GLOB SOURCE_FILES
         asio/server.cpp
         asio/client.cpp
         )
+# use static boost libraries
+set(Boost_USE_STATIC_LIBS ON)
+
+# find boost
+find_package(Boost REQUIRED COMPONENTS
+        unit_test_framework
+        log
+        log_setup
+        chrono
+        system
+        thread
+        )
 
 # include list
-set(INCLUDE_LIST
-        ${CMAKE_SOURCE_DIR}
-        )
+set(INCLUDE_LIST ${CMAKE_CURRENT_SOURCE_DIR})
 
 # library list
-set(LIBRARY_LIST
-        # std library
-        )
+#set(LIBRARY_LIST
+#        # std library
+#        pthread
+#        )
 
-# create a library
-add_library(sting_dev STATIC
-        ${SOURCE_FILES}
-        )
-add_library(sting::dev ALIAS ${PROJECT_NAME})
+# create a static library
+add_library(sting_dev STATIC ${SOURCE_FILES})
 
 # include libraries
-target_include_directories(sting_dev PUBLIC
-        ${INCLUDE_LIST}
-        )
+target_include_directories(sting_dev PUBLIC ${INCLUDE_LIST} ${Boost_INCLUDE_DIRS})
 
 # link libraries
-target_link_libraries(sting_dev PUBLIC
-        ${LIBRARY_LIST}
-        )
-
-if (USE_BOOST)
-    set(Boost_USE_STATIC_LIBS ON)
-    find_package(Boost REQUIRED COMPONENTS
-            unit_test_framework
-            log
-            log_setup
-            chrono
-            system
-            thread
-            )
-
-    target_include_directories(sting_dev PUBLIC
-            ${Boost_INCLUDE_DIRS}
-            )
-
-    target_link_libraries(sting_dev ${Boost_LIBRARIES})
-endif(USE_BOOST)
+target_link_libraries(sting_dev PUBLIC ${LIBRARY_LIST} ${Boost_LIBRARIES})

@@ -4,8 +4,6 @@
 
 #include "logger.h"
 
-#ifdef USE_BOOST
-
 bool log_initializer::init_flag(false);
 
 void log_initializer::init(const log_config& config) {
@@ -38,9 +36,3 @@ void log_initializer::init(const log_config& config) {
     logging::add_common_attributes();
     init_flag = true;
 }
-
-#else
-
-#endif
-
-

@@ -4,9 +4,8 @@
 #ifndef DEV_UTILITY_LOGGER_H
 #define DEV_UTILITY_LOGGER_H
 
-#include <core/common.h>
+#include "common.h"
 
-#ifdef USE_BOOST
 // boost include
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -41,9 +40,5 @@ public:
 private:
     static bool init_flag;
 };
-
-#else
-
-#endif
 
 #endif //DEV_UTILITY_LOGGER_H

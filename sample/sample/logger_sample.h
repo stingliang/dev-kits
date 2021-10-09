@@ -11,11 +11,7 @@
 
 void logger_sample() {
     auto config = log_initializer::log_config();
-#ifdef WIN32
-    config.log_path = R"(C:\Users\liangrui\CLionProjects\dev-utility\output\log)";
-#else
     config.log_path = R"(./log)";
-#endif
     config.severity = boost::log::trivial::trace;
     log_initializer::init(config);
 

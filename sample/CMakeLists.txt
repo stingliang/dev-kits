@@ -2,13 +2,11 @@
 project(sample)
 
 # executable files
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(sample main.cpp)
 
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(sample PUBLIC
         ${CMAKE_SOURCE_DIR}/core
         ${CMAKE_SOURCE_DIR}/sample
         )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-        sting::dev
-        )
+target_link_libraries(${PROJECT_NAME} PRIVATE sting_dev)

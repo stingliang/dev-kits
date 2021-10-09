@@ -39,6 +39,7 @@ target_link_libraries(sting_dev PUBLIC
         )
 
 if (USE_BOOST)
+    set(Boost_USE_STATIC_LIBS ON)
     find_package(Boost REQUIRED COMPONENTS
             unit_test_framework
             log

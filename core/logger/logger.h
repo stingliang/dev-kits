@@ -4,7 +4,6 @@
 #ifndef DEV_UTILITY_LOGGER_H
 #define DEV_UTILITY_LOGGER_H
 
-
 #include <core/common.h>
 
 enum Severity {
@@ -12,34 +11,48 @@ enum Severity {
     DEBUG,
     INFO,
     WARN,
-    ERROR
+    ERROR,
+    FATAL
 };
 
 #ifdef USE_BOOST
+// boost include
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/utility/setup/console.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/support/date_time.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
-//#else
-#define LOGGER_LEVEL(SEVERITY) logger::getInstance()->setSeverity(SEVERITY);
-#define LOG(SEVERITY, MESSAGE) logger::getInstance()->m_ss.str(""); \
-logger::getInstance()->m_ss << MESSAGE; \
-logger::getInstance()->log(SEVERITY);
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
+namespace expr = boost::log::expressions;
 
-class logger {
+#define LOGGER(MODULE, SEVERITY) BOOST_LOG_TRIVIAL(SEVERITY) << "[" << (MODULE) << "] "
+
+class log_initializer {
 public:
-    using Ptr = std::shared_ptr<logger>;
-    static Ptr getInstance();
-    static Ptr getInstance(const std::string& log_path);
-    static void setSeverity(Severity);
-    static void log(const Severity& severity);
-
-    static std::stringstream m_ss;
+    struct log_config {
+        bool console_print = true;
+        logging::trivial::severity_level severity = boost::log::trivial::info;
+        std::string log_path;
+        size_t logfile_maxsize = 128 *1024 *1024;
+    };
+    static void init(const log_config&);
+    static bool isInit() { return init_flag; }
 private:
-    logger() = default;
-    static Severity m_severity_level;
-    static Ptr m_logger;
-    static std::mutex m_mutex;
-    static std::map<int, std::string> m_severity;
+    static bool init_flag;
 };
-#endif
 
+#else
+
+#endif
 
 #endif //DEV_UTILITY_LOGGER_H

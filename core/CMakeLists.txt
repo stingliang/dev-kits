@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10)
 project(sting_dev)
 
 # include all source files
-file(GLOB SOURCES
+file(GLOB SOURCE_FILES
         logger/logger.cpp
         utility/utility.cpp
         asio/server.cpp
@@ -20,12 +20,11 @@ set(INCLUDE_LIST
 # library list
 set(LIBRARY_LIST
         # std library
-        # pthread
         )
 
 # create a library
 add_library(sting_dev STATIC
-        ${SOURCES}
+        ${SOURCE_FILES}
         )
 add_library(sting::dev ALIAS ${PROJECT_NAME})
 
@@ -38,3 +37,20 @@ target_include_directories(sting_dev PUBLIC
 target_link_libraries(sting_dev PUBLIC
         ${LIBRARY_LIST}
         )
+
+if (USE_BOOST)
+    find_package(Boost REQUIRED COMPONENTS
+            unit_test_framework
+            log
+            log_setup
+            chrono
+            system
+            thread
+            )
+
+    target_include_directories(sting_dev PUBLIC
+            ${Boost_INCLUDE_DIRS}
+            )
+
+    target_link_libraries(sting_dev ${Boost_LIBRARIES})
+endif(USE_BOOST)

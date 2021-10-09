@@ -5,7 +5,8 @@
 #include "sample/logger_sample.h"
 #include "sample/utility_sample.h"
 
-#define CROSS_LINE(MODULE_NAME) LOG(INFO, "====================[" << MODULE_NAME << "]====================")
+#define CROSS_LINE(MODULE_NAME) \
+std::cout << "====================[" << MODULE_NAME << "]====================" << std::endl;
 
 int main() {
     CROSS_LINE("logger")

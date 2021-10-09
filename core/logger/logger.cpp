@@ -6,47 +6,41 @@
 
 #ifdef USE_BOOST
 
-//#else
-logger::Ptr logger::m_logger = nullptr;
-std::mutex logger::m_mutex;
-std::map<int, std::string> logger::m_severity{
-    std::make_pair<int, std::string>(0, "\033[36mTRACE\033[0m"),
-    std::make_pair<int, std::string>(1, "\033[33mDEBUG\033[0m"),
-    std::make_pair<int, std::string>(2, "\033[32mINFO\033[0m"),
-    std::make_pair<int, std::string>(3, "\033[35mWARN\033[0m"),
-    std::make_pair<int, std::string>(4, "\033[31mERROR\033[0m")
-};
-std::stringstream logger::m_ss;
+bool log_initializer::init_flag(false);
 
-Severity logger::m_severity_level(INFO);
-
-logger::Ptr logger::getInstance() {
-    if (m_logger) {
-        return m_logger;
-    } else {
-        m_logger = Ptr(new logger);
-        return m_logger;
+void log_initializer::init(const log_config& config) {
+    if (isInit()) { return; }
+    logging::core::get()->set_filter(logging::trivial::severity >= config.severity);
+    // set log format
+    auto fmt = (
+        expr::stream
+            << "["
+            << expr::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d %H:%M:%S")
+            << "][" << logging::trivial::severity
+            << "]" << expr::smessage
+        );
+    if (config.console_print) {
+        boost::log::add_console_log(
+            std::cout,
+            logging::keywords::format = fmt
+        );
     }
-}
-
-logger::Ptr logger::getInstance(const std::string &log_path) {
-    if (m_logger) {
-        return m_logger;
-    } else {
-        return Ptr(new logger);
+    if (!config.log_path.empty()) {
+        boost::posix_time::ptime datetime= boost::posix_time::second_clock::local_time();
+        boost::posix_time::ptime pt(datetime.date(), datetime.time_of_day());
+        std::string file_name = config.log_path + "/" + to_iso_string(pt) + ".log";
+        logging::add_file_log(
+            keywords::file_name = file_name,
+            keywords::rotation_size = config.logfile_maxsize,
+            keywords::format = fmt
+        );
     }
+    logging::add_common_attributes();
+    init_flag = true;
 }
 
-void logger::setSeverity(Severity severity) {
-    m_severity_level = severity;
-}
+#else
 
-void logger::log(const Severity &severity) {
-    // for thread safe
-    if (severity >= m_severity_level) {
-        m_mutex.lock();
-        std::cout << "[" << m_severity.at(severity) << "] " << m_ss.str() << std::endl;
-        m_mutex.unlock();
-    }
-}
 #endif
+
+

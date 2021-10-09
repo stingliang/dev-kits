@@ -6,15 +6,6 @@
 
 #include <core/common.h>
 
-enum Severity {
-    TRACE = 0,
-    DEBUG,
-    INFO,
-    WARN,
-    ERROR,
-    FATAL
-};
-
 #ifdef USE_BOOST
 // boost include
 #include <boost/log/core.hpp>

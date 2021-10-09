@@ -26,12 +26,18 @@ namespace keywords = boost::log::keywords;
 namespace expr = boost::log::expressions;
 
 #define LOGGER(MODULE, SEVERITY) BOOST_LOG_TRIVIAL(SEVERITY) << "[" << (MODULE) << "] "
+#define TRACE boost::log::trivial::trace
+#define DEBUG boost::log::trivial::debug
+#define INFO boost::log::trivial::info
+#define WARNING boost::log::trivial::warning
+#define ERROR boost::log::trivial::error
+#define FATAL boost::log::trivial::fatal
 
 class log_initializer {
 public:
     struct log_config {
         bool console_print = true;
-        logging::trivial::severity_level severity = boost::log::trivial::info;
+        logging::trivial::severity_level severity = INFO;
         std::string log_path;
         size_t logfile_maxsize = 128 *1024 *1024;
     };

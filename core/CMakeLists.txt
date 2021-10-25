@@ -2,7 +2,15 @@
 cmake_minimum_required(VERSION 3.10)
 
 # project name
-project(sting_dev)
+project(DEV-KITS VERSION "0.1.0")
+set(DEV_KITS_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/../cmake")
+list(APPEND CMAKE_MODULE_PATH ${DEV_KITS_CMAKE_DIR})
+
+# options
+include(options)
+configure_project()
+# boost dependencies
+include(boost)
 
 # include all source files
 file(GLOB SOURCE_FILES
@@ -11,27 +19,9 @@ file(GLOB SOURCE_FILES
         asio/server.cpp
         asio/client.cpp
         )
-# use static boost libraries
-set(Boost_USE_STATIC_LIBS ON)
-
-# find boost
-find_package(Boost REQUIRED COMPONENTS
-        unit_test_framework
-        log
-        log_setup
-        chrono
-        system
-        thread
-        )
 
 # include list
 set(INCLUDE_LIST ${CMAKE_CURRENT_SOURCE_DIR})
-
-# library list
-#set(LIBRARY_LIST
-#        # std library
-#        pthread
-#        )
 
 # create a static library
 add_library(sting_dev STATIC ${SOURCE_FILES})

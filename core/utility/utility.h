@@ -17,7 +17,7 @@ template<typename T1, typename T2>
 std::stringstream printStl(std::map<T1,T2>& m) {
     std::stringstream ss;
     for(auto const& elem : m) {
-        ss << "[" << elem.first << ": " << elem.second << "]";
+        ss << "[" << elem.first << ":" << elem.second << "]";
     }
     return ss;
 }

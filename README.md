@@ -37,7 +37,7 @@ Just `git clone` it to your project and use `add_subdirectory(dev-utility)` to i
 
 **components**
 
-The dev utility package includes the following components:
+The development utility kits includes the following components:
 
 - `logger`
 

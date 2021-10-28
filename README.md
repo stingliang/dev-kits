@@ -35,7 +35,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE sting_dev)
 
 Just `git clone` it to your project and use `add_subdirectory(dev-utility)` to import
 
-The dev utility package includes the following components:
+**components**
+
+The development utility kits includes the following components:
 
 - `logger`
 

@@ -19,6 +19,8 @@
 #include <boost/log/support/date_time.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+namespace devkits {
+
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace sinks = boost::log::sinks;
@@ -51,5 +53,7 @@ private:
     static bool isInit() { return init_flag; }
     static bool init_flag;
 };
+
+} // devkits end
 
 #endif //DEV_UTILITY_LOGGER_H

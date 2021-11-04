@@ -50,13 +50,13 @@ The development utility kits includes the following components:
   
   void logger_sample() {
       // construct a log_initializer
-      auto config = log_initializer::log_config();
+      auto config = devkits::log_initializer::log_config();
       // config log path
       config.log_path = R"(./log)";
       // config log severity
       config.severity = boost::log::trivial::trace;
       // don't forget to call 'init (log_config)' to make the configuration available
-      log_initializer::init(config);
+      devkits::log_initializer::init(config);
       
       // use '<<' to output log information
       SAMPLE_LOG(trace) << "A trace severity message";
@@ -79,10 +79,10 @@ The development utility kits includes the following components:
       std::map<int, std::string> _map {
           {1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}
       };
-      std::cout << "map: " << printStl(_map).str() << std::endl;
+      std::cout << "map: " << devkits::printStl(_map).str() << std::endl;
   
       std::vector<int> _vector { 1, 2, 3, 4, 5 };
-      std::cout << "vector: " << printStl(_vector).str() << std::endl;
+      std::cout << "vector: " << devkits::printStl(_vector).str() << std::endl;
   }
   ```
   

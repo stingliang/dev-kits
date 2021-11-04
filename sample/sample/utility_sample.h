@@ -12,10 +12,10 @@ void utility_sample() {
         {1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}
     };
 
-    std::cout << "map: " << printStl(_map).str() << std::endl;
+    std::cout << "map: " << devkits::printStl(_map).str() << std::endl;
 
     std::vector<int> _vector { 1, 2, 3, 4, 5 };
-    std::cout << "vector: " << printStl(_vector).str() << std::endl;
+    std::cout << "vector: " << devkits::printStl(_vector).str() << std::endl;
 }
 
 #endif //DEV_UTILITY_LIBRARY_UTILITY_SAMPLE_H

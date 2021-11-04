@@ -21,7 +21,7 @@ project(sample)
 # cpp version
 set(CMAKE_CXX_STANDARD 11)
 # sting_dev library
-add_subdirectory(dev-utility)
+add_subdirectory(dev-kits)
 # executable files
 add_executable(sample main.cpp)
 # include path
@@ -30,7 +30,7 @@ target_include_directories(sample PUBLIC
         ${CMAKE_SOURCE_DIR}/sample
         )
 # link to development kits
-target_link_libraries(${PROJECT_NAME} PRIVATE sting_dev)
+target_link_libraries(${PROJECT_NAME} PRIVATE dev_kits)
 ```
 
 Just `git clone` it to your project and use `add_subdirectory(dev-utility)` to import

@@ -24,10 +24,10 @@ file(GLOB SOURCE_FILES
 set(INCLUDE_LIST ${CMAKE_CURRENT_SOURCE_DIR})
 
 # create a static library
-add_library(sting_dev STATIC ${SOURCE_FILES})
+add_library(dev_kits STATIC ${SOURCE_FILES})
 
 # include libraries
-target_include_directories(sting_dev PUBLIC ${INCLUDE_LIST} ${Boost_INCLUDE_DIRS})
+target_include_directories(dev_kits PUBLIC ${INCLUDE_LIST} ${Boost_INCLUDE_DIRS})
 
 # link libraries
-target_link_libraries(sting_dev PUBLIC ${LIBRARY_LIST} ${Boost_LIBRARIES})
+target_link_libraries(dev_kits PUBLIC ${LIBRARY_LIST} ${Boost_LIBRARIES})

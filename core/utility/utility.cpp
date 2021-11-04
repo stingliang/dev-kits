@@ -3,3 +3,5 @@
 //
 
 #include "utility.h"
+
+namespace devkits {}

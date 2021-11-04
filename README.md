@@ -21,7 +21,7 @@ project(sample)
 # cpp version
 set(CMAKE_CXX_STANDARD 11)
 # sting_dev library
-add_subdirectory(dev-utility)
+add_subdirectory(dev-kits)
 # executable files
 add_executable(sample main.cpp)
 # include path
@@ -30,7 +30,7 @@ target_include_directories(sample PUBLIC
         ${CMAKE_SOURCE_DIR}/sample
         )
 # link to development kits
-target_link_libraries(${PROJECT_NAME} PRIVATE sting_dev)
+target_link_libraries(${PROJECT_NAME} PRIVATE dev_kits)
 ```
 
 Just `git clone` it to your project and use `add_subdirectory(dev-utility)` to import
@@ -50,13 +50,13 @@ The development utility kits includes the following components:
   
   void logger_sample() {
       // construct a log_initializer
-      auto config = log_initializer::log_config();
+      auto config = devkits::log_initializer::log_config();
       // config log path
       config.log_path = R"(./log)";
       // config log severity
       config.severity = boost::log::trivial::trace;
       // don't forget to call 'init (log_config)' to make the configuration available
-      log_initializer::init(config);
+      devkits::log_initializer::init(config);
       
       // use '<<' to output log information
       SAMPLE_LOG(trace) << "A trace severity message";
@@ -79,10 +79,10 @@ The development utility kits includes the following components:
       std::map<int, std::string> _map {
           {1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}
       };
-      std::cout << "map: " << printStl(_map).str() << std::endl;
+      std::cout << "map: " << devkits::printStl(_map).str() << std::endl;
   
       std::vector<int> _vector { 1, 2, 3, 4, 5 };
-      std::cout << "vector: " << printStl(_vector).str() << std::endl;
+      std::cout << "vector: " << devkits::printStl(_vector).str() << std::endl;
   }
   ```
   

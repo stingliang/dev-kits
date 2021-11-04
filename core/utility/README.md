@@ -10,23 +10,18 @@
 
 int main() {
 std::map<int, std::string> _map {
-{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}
-};
-LOG(INFO, "map: " << printStl(_map).str())
+        {1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}
+    };
 
-std::vector<int> _vector { 1, 2, 3, 4, 5 };
-LOG(INFO, "vector: " << printStl(_vector).str())
+    std::cout << "map: " << devkits::printStl(_map).str() << std::endl;
+
+    std::vector<int> _vector { 1, 2, 3, 4, 5 };
+    std::cout << "vector: " << devkits::printStl(_vector).str() << std::endl;
 }
 ```
 运行结果：
 ```
-[INFO] ====================[logger]====================
-[TRACE] Hello, World!
-[DEBUG] Hello, World!
-[INFO] Hello, World!
-[WARN] Hello, World!
-[ERROR] Hello, World!
-[INFO] ====================[utility]====================
-[INFO] map: [1: one][2: two][3: three][4: four][5: five]
-[INFO] vector: [1][2][3][4][5]
+====================[utility]====================
+map: [1:one][2:two][3:three][4:four][5:five]
+vector: [1][2][3][4][5]
 ```

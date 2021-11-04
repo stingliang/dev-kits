@@ -7,6 +7,8 @@
 
 #include "../common.h"
 
+namespace devkits {
+
 ///
 /// \tparam T1
 /// \tparam T2
@@ -35,5 +37,7 @@ std::stringstream printStl(T& s) {
     }
     return ss;
 }
+
+} // devkits end
 
 #endif //DEV_UTILITY_LIBRARY_UTILITY_H

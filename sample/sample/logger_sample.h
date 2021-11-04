@@ -10,10 +10,10 @@
 #define SAMPLE_LOG(SEVERITY) LOGGER("Sample", SEVERITY)
 
 void logger_sample() {
-    auto config = log_initializer::log_config();
+    auto config = devkits::log_initializer::log_config();
     config.log_path = R"(./log)";
     config.severity = boost::log::trivial::trace;
-    log_initializer::init(config);
+    devkits::log_initializer::init(config);
 
     SAMPLE_LOG(trace) << "A trace severity message";
     SAMPLE_LOG(debug) << "A debug severity message";

@@ -9,4 +9,4 @@ target_include_directories(sample PUBLIC
         ${CMAKE_SOURCE_DIR}/sample
         )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE dev_kits)
+target_link_libraries(${PROJECT_NAME} PRIVATE devkits)

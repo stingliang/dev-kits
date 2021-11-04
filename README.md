@@ -30,7 +30,7 @@ target_include_directories(sample PUBLIC
         ${CMAKE_SOURCE_DIR}/sample
         )
 # link to development kits
-target_link_libraries(${PROJECT_NAME} PRIVATE dev_kits)
+target_link_libraries(${PROJECT_NAME} PRIVATE devkits)
 ```
 
 Just `git clone` it to your project and use `add_subdirectory(dev-utility)` to import
